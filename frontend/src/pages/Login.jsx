@@ -33,9 +33,9 @@ const Login = () => {
     try {
       setloading(true)
       response = await axios.post(`${url}/users/login`, obj, { headers });
-      console.log(response)
+      // console.log(response)
       setloading(false)
-      console.log('Response Data:', response.data);
+      // console.log('Response Data:', response.data);
       if(response.status==200)
       {
         toast.success(response.data.mesg)
@@ -50,7 +50,7 @@ const Login = () => {
       // toast.success("login successfull")
       // Handle the response data or perform other actions here
     } catch (error) {
-      console.error('Error:', error);
+      // console.error('Error:', error);
       setloading(false)
       toast.error("not able to login")
     }
@@ -60,7 +60,7 @@ const Login = () => {
 
   return (
     <>
-    {/* <ToastContainer position="top-center" autoClose={3000}/> */}
+    {/* <ToastContainer theme="colored"/> */}
     {loading ? <Spinner></Spinner> : 
       <div className='login-page'>
         
@@ -73,7 +73,7 @@ const Login = () => {
           <input type="password" name="password" value={password} placeholder='enter a password' style={{ width: "100%" }} onChange={(e) => setpassword(e.target.value)} required/>
           <br />
           <br />
-          <button style={{ width: "100%" ,backgroundColor:"black",color:"white",padding:"1%",cursor:"pointer"}}>Submit</button>
+          <button style={{ width: "100%" ,backgroundColor:"purple",color:"white",padding:"1%",cursor:"pointer"}}>Submit</button>
           <br />
           <br />
           New User? Click here to <Link to='/register'>Register</Link>

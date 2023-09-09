@@ -5,12 +5,11 @@ import axios from "axios";
 import Spinner from '../components/Spinner.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-// import {toast} from 'react-hot-toast';
 // import {message} from "antd"
 
-const Summery = () => {
+const ScifiImage = () => {
   const [text,settext]=useState("")
-  const[textdata,settextdata] = useState("")
+  const[image,setimage] = useState("")
 
   const [loading,setloading]=useState(false)
 
@@ -24,7 +23,7 @@ const Summery = () => {
     };
     try {
       setloading(true)
-      const res = await axios.post(`${url}/openai/summary`, obj, {
+      const res = await axios.post(`${url}/openai/scifiimage`, obj, {
       headers: {
         'content-type': 'application/json',
         'Authorization': `Bearer ${localStorage.getItem("token")}`
@@ -32,21 +31,23 @@ const Summery = () => {
       });
     //   console.log(res)
     //  console.log(res.data)
-     if(res.status==201)
+     
+    //  toast.success(res.data.mesg)
+    //  toast.success("data fetched")
+    if(res.status==201)
      {
       toast.warn(res.data.msg)
      }
      else
      {
       toast.success("generated....")
-      settextdata(res.data)
+      setimage(res.data)
      setloading(false)
      }
-    //  toast.success(res.data.mesg)
-    //  toast.success("data fetched")
     } catch (error) {
       setloading(false)
-      toast.error("please login first..then access...")
+    //   toast.error("not able to login")
+    toast.error("please login first..then access...")
     }
   };
 
@@ -68,31 +69,32 @@ const Summery = () => {
             }
         }
 
-}, [text,textdata]);
+}, [text,image]);
 
   return (
     <>
     <ToastContainer theme="colored"/>
       <div className='summary-page'>
-        <h2 style={{textAlign:"center"}}>Summarize Text</h2>
+        <h2 style={{textAlign:"center"}}>Scifi-Image</h2>
         <br />
         <form action="" onSubmit={handleSubmit}>
           <textarea  id="myTextarea"
-name="text" value={text} placeholder='enter a text..' style={{ width: "100%", minHeight: "50px", resize: "none" }} onChange={(e) => settext(e.target.value)} />
+name="text" value={text} placeholder='enter an text' style={{ width: "100%", minHeight: "50px", resize: "none" }} onChange={(e) => settext(e.target.value)} />
           <br />
           <br />
-          <button style={{ width: "100%" ,backgroundColor:"purple",color:"white",padding:"1%",cursor:"pointer"}}>Submit</button>
+          <button style={{ width: "100%" ,backgroundColor:"purple",color:"white",padding:"1%",cursor:"pointer"}}>Generate Image</button>
           <br />
           <br />
           Not this tool ? <Link to='/'> Go Back</Link>
         </form>
         <div className='summury-container'>
             {loading && <Spinner></Spinner>}
-            {textdata}
+            <img src={image}  alt='scifi' style={{width:"100%",height:"100%"}}/>
+            {/* {image} */}
         </div>
       </div>
     </>
   );
 };
 
-export default Summery;
+export default ScifiImage;

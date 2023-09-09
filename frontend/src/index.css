@@ -12,7 +12,7 @@ html,body{
   margin: auto;
   width: 30%;
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid purple;
   background-color: aliceblue;
   margin-top: 5%;
   flex-direction: column;
@@ -22,7 +22,7 @@ html,body{
   margin: auto;
   width: 30%;
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid purple;
   background-color: aliceblue;
   margin-top: 5%;
   flex-direction: column;
@@ -32,7 +32,7 @@ html,body{
   margin: auto;
   width: 40%;
   padding: 20px;
-  border: 2px solid black;
+  border: 2px solid purple;
   background-color: aliceblue;
   margin-top: 4%;
   border-radius: 10px;
@@ -45,10 +45,10 @@ textarea{
   overflow: hidden;
 }
 .summury-container{
-  height: 50vh;
-  border: 2px solid brown;
+  height: 60vh;
+  border: 2px solid purple;
   background-color: white;
-  color: blue;
+  color: black;
   border-radius: 5px;
   padding: 5px;
   font-size: medium;
@@ -59,7 +59,7 @@ textarea{
 }
 
 .cardContainer{
-  width: 85%;
+  width: 80%;
   margin: auto;
   display: grid; 
   grid-template-columns: repeat(5,1fr);
@@ -84,30 +84,29 @@ textarea{
   font-weight: bolder;
 }
 .card h5{
-  margin-top: 2%;
+  margin: 2% 0px;
 }
 
 /* Chatbot.css */
 .chatbot-container {
-  max-width: 400px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  margin-top: 5%;
-  border-radius: 10px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height:50%
+  display: flex;
+  flex-direction: column;
+  height: 70vh; /* 100% of the viewport height */
+  max-height: 100vh;
+  width:50%;
+  margin: auto;
+  border: 1px solid purple;
+  margin-top: 2%; /* In case content overflows, don't exceed viewport height */
 }
 
 .chat {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  
+  flex-grow: 1; /* The chat area expands to take up remaining vertical space */
+  overflow-y: auto; /* Allow vertical scrolling within the chat container */
+  padding: 20px;
 }
 
 .chat-message {
-  max-width: 70%;
+  width: 70%;
   margin: 5px;
   padding: 10px;
   border-radius: 5px;
@@ -122,8 +121,9 @@ textarea{
 .user-input {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  margin-top: 10px;
+  padding: 10px;
+  background-color: #f0f0f0;
+  
 }
 
 input[type="text"] {
@@ -132,6 +132,7 @@ input[type="text"] {
   border: 1px solid #ccc;
   border-radius: 5px;
   outline: none;
+  width:85%
 }
 
 button {
@@ -148,6 +149,7 @@ button {
 button:hover {
   background-color: #0056b3;
 }
+
 
 @media (max-width: 600px) {
   /* Adjust styles for smaller screens */
@@ -166,6 +168,29 @@ button:hover {
   button {
     margin-top: 10px;
   }
+}
+
+@media screen and (min-width:512px) and (max-width:1024px){
+ 
+  .summary-page{
+    width:90%;
+    margin: auto;
+  }
+  .cardContainer{
+   grid-template-columns: repeat(3,1fr);
+  }
+  
+}
+@media screen and (min-width:300px) and (max-width:511px){
+  .summary-page{
+      width:95%;
+      margin: auto;
+      
+  }
+  .cardContainer{
+    grid-template-columns: repeat(2,1fr);
+   }
+  
 }
 
 

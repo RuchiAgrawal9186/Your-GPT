@@ -6,6 +6,8 @@ import Register from '../pages/Register'
 import Summery from '../pages/Summery'
 import Paragraph from '../pages/Paragraph'
 import Chatbot from '../pages/Chatbot'
+import JsConverter from '../pages/JsConverter'
+import ScifiImage from '../pages/ScifiImage'
 
 
 const MainRoutes = () => {
@@ -18,6 +20,8 @@ const MainRoutes = () => {
         <Route path="/summary" element={<Summery></Summery>}/>
         <Route path="/paragraph" element={<Paragraph></Paragraph>}/>
         <Route path="/chatbot" element={<Chatbot></Chatbot>}/>
+        <Route path="/converter" element={<JsConverter></JsConverter>}/>
+        <Route path="/scifiimage" element={<ScifiImage></ScifiImage>}/>
     </Routes>
     </>
   )

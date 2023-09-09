@@ -31,8 +31,8 @@ const Register = () => {
         try {
           setloading(true)
           const response = await axios.post(`${url}/users/register`, obj, { headers });
-          console.log(response)
-          console.log('Response Data:', response.data);
+          // console.log(response)
+          // console.log('Response Data:', response.data);
           setloading(false)
           if(response.status==200)
           {
@@ -45,7 +45,7 @@ const Register = () => {
           }
           // Handle the response data or perform other actions here
         } catch (error) {
-          console.error('Error:', error);
+          // console.error('Error:', error);
           setloading(false)
           toast.error("not able to Register")
         }
@@ -73,7 +73,7 @@ const Register = () => {
         <input type="password" name="password" value = {password} placeholder='enter a password' style={{width:"100%"}}  onChange={(e)=>setpassword(e.target.value)} required/>
         <br />
         <br />
-        <button style={{width:"100%",backgroundColor:"black",color:"white",padding:"1%",cursor:"pointer"}}>Submit</button>
+        <button style={{width:"100%",backgroundColor:"purple",color:"white",padding:"1%",cursor:"pointer"}}>Submit</button>
         <br />
         <br />
         Already register ? click here to <Link to='/login'>Login</Link>

@@ -25,16 +25,26 @@ const Paragraph = () => {
       setloading(true)
       const res = await axios.post(`${url}/openai/paragraph`, obj, {
       headers: {
-        'content-type': 'application/json'
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem("token")}`
       }
       });
      console.log(res.data)
-     setpara(res.data)
-     setloading(false)
+     if(res.status==201)
+     {
+      toast.warn(res.data.msg)
+     }
+     else
+     {
+      toast.success("generated....")
+      setpara(res.data)
+      setloading(false)
+     }
     //  toast.success(res.data.mesg)
     //  toast.success("data fetched")
     } catch (error) {
       setloading(false)
+      toast.error("please login first..then access...")
     //   toast.error("not able to login")
     }
   };
@@ -61,7 +71,7 @@ const Paragraph = () => {
 
   return (
     <>
-    <ToastContainer />
+    <ToastContainer theme="colored"/>
       <div className='summary-page'>
         <h2 style={{textAlign:"center"}}>Generate Paragraph</h2>
         <br />
@@ -70,7 +80,7 @@ const Paragraph = () => {
 name="text" value={text} placeholder='enter a word...' style={{ width: "100%", minHeight: "50px", resize: "none" }} onChange={(e) => settext(e.target.value)} />
           <br />
           <br />
-          <button style={{ width: "100%" ,backgroundColor:"black",color:"white",padding:"1%",cursor:"pointer"}}>Generate</button>
+          <button style={{ width: "100%" ,backgroundColor:"purple",color:"white",padding:"1%",cursor:"pointer"}}>Generate</button>
           <br />
           <br />
           Not this tool ? <Link to='/'> Go Back</Link>
