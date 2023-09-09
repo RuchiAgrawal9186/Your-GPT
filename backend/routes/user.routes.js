@@ -1,4 +1,5 @@
 const express = require("express")
+require("dotenv").config()
 const userRouter = express.Router()
 
 const bcrypt = require("bcrypt")
@@ -16,7 +17,7 @@ userRouter.post("/register",async(req,res)=>{
    
            if(finduser)
            {
-               res.status(500).json({mesg:"User already exist, please login"})
+               res.status(201).json({mesg:"User already exist, please login"})
            }
    
            else
@@ -31,7 +32,7 @@ userRouter.post("/register",async(req,res)=>{
                        {
                                const user = new UserModel({username,email,password:hash})
                                await user.save()
-                               res.status(200).json({msg:"Registration Successfully" , user:req.body})   
+                               res.status(200).json({mesg:"Registration Successfully" , user:req.body})   
                         
                        }
                  
@@ -51,7 +52,7 @@ userRouter.post("/register",async(req,res)=>{
    
        try {
    
-           let user = await UserModel.findOne({email})
+           let user = await UserModel.findOne({email}).maxTimeMS(30000);
    
            if(user)
            {
@@ -64,13 +65,13 @@ userRouter.post("/register",async(req,res)=>{
                    }
                    else
                    {
-                       res.status(500).json({mesg:"Wrong Crediantials"})
+                       res.status(201).json({mesg:"Wrong Crediantials"})
                    }
                })
            }
            else
            {
-               res.status(500).json({mesg:"User does not exists"})
+               res.status(201).json({mesg:"User does not exists"})
            }  
            
        } catch (error) {

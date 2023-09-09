@@ -8,6 +8,7 @@ app.use(cors())
 
 // import routes
 const {userRouter} = require("./routes/user.routes")
+const {apiRouter}=require("./routes/openai.routes")
 
 // import db connection
 const {connection} =require("./db")
@@ -17,6 +18,9 @@ const {logoutModel} = require("./models/logout.model")
 
 
 app.use("/users",userRouter)
+app.use("/openai",apiRouter)
+
+
 
 app.get('/logout', async(req, res)=>{
     const token = req.headers.authorization?.split(" ")[1];
