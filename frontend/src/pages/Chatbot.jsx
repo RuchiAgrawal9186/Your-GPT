@@ -1,95 +1,92 @@
-import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+
+import React, { useEffect, useState, useRef } from 'react';
 import { url } from "../url.js";
 import axios from "axios";
 import Spinner from '../components/Spinner.jsx';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
-// import {message} from "antd"
 
 const Chatbot = () => {
-  const [text,settext]=useState("")
-  const[response,setresponse] = useState("")
+  const [text, setText] = useState("");
+  const [messages, setMessages] = useState([
+    { type: 'bot', content: "Hello! How can I help you?" } // Initial bot message
+  ]);
 
-  const [loading,setloading]=useState(false)
-
-  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const inputRef = useRef(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const obj = {
-      text
-    };
+    const obj = { text };
+
     try {
-      setloading(true)
+      setLoading(true);
       const res = await axios.post(`${url}/openai/chatbot`, obj, {
-      headers: {
-        'content-type': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem("token")}`
-      }
+        headers: {
+          'content-type': 'application/json',
+          'Authorization': `Bearer ${localStorage.getItem("token")}`
+        }
       });
-    //  console.log(res.data)
-     if(res.status==201)
-     {
-      toast.warn(res.data.msg)
-     }
-     else
-     {
-      // toast.success("generated....")
-      setresponse(res.data)
-      setloading(false)
-     }
-    //  toast.success(res.data.mesg)
-    //  toast.success("data fetched")
+
+      if (res.status === 201) {
+        toast.warn(res.data.msg);
+      } else {
+        setMessages([
+          ...messages,
+          { type: 'user', content: text }, // Add user message to state
+          { type: 'bot', content: res.data } // Add bot response to state
+        ]);
+      }
+
+      setLoading(false);
     } catch (error) {
-      setloading(false)
-      toast.error("please login first..then access...")
-    //   toast.error("not able to login")
+      setLoading(false);
+      toast.error("Please login first, then access...");
+    }
+  };
+
+  // Function to handle sending messages on Enter key press
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSubmit(e);
     }
   };
 
   useEffect(() => {
-    // Update the textarea's height to fit the content when the component mounts or when the text changes
-    const textarea = document.getElementById('myTextarea');
-    textarea.style.height = 'auto';
-    textarea.style.height = textarea.scrollHeight + 'px';
-
-
-    const summaryContainer = document.querySelector('.summary-container');
-        if (summaryContainer) {
-            summaryContainer.style.minHeight = 'unset'; // Reset min-height
-            const containerHeight = summaryContainer.clientHeight;
-            const contentHeight = summaryContainer.scrollHeight;
-            
-            if (contentHeight > containerHeight) {
-                summaryContainer.style.minHeight = contentHeight + 'px';
-            }
-        }
-
-}, [text,response]);
+    // Scroll to the bottom of the chat window after a new message is added
+    inputRef.current.scrollIntoView({ behavior: 'smooth' });
+  }, [messages]);
 
   return (
     <>
-    <ToastContainer theme="colored"/>
-      <div className='summary-page'>
-        <h2 style={{textAlign:"center"}}>Chat Bot</h2>
-        <br />
-        <form action="" onSubmit={handleSubmit}>
-          <textarea  id="myTextarea"
-name="text" value={text} placeholder='enter a word...' style={{ width: "100%", minHeight: "50px", resize: "none" }} onChange={(e) => settext(e.target.value)} />
-          <br />
-          <br />
-          <button style={{ width: "100%" ,backgroundColor:"purple",color:"white",padding:"1%",cursor:"pointer"}}>Chat</button>
-          <br />
-          <br />
-          Not this tool ? <Link to='/'> Go Back</Link>
-        </form>
-        <div className='summury-container'>
-            {loading && <Spinner></Spinner>}
-            {response}
+      <ToastContainer theme="colored" />
+      <div id="chat-window">
+        <div className="main-title" style={{textAlign:"center",color:"white"}}>CHAT BOT USING CHAT-GPT</div>
+        <div id="chat-messages">
+          {messages.map((message, index) => (
+            <div key={index} className={`message ${message.type}-message`}>
+              {message.type === 'bot' && <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTMSTcf9vxteFLXwKOVebZMuNkDh7PkAvwe7w&usqp=CAU" alt="bot icon" />}
+              {message.type === 'user' && <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQx9tjaExsY-srL4VsHNE_OKGVCJ-eIFNBktw&usqp=CAU" alt="user icon" />}
+              <span>{message.content}</span>
+            </div>
+          ))}
+          <div ref={inputRef} /> {/* Ref for scrolling */}
         </div>
+        <form id="chat-form" onSubmit={handleSubmit}>
+          <input
+            type="text"
+            id="chat-input"
+            autoComplete="off"
+            placeholder="Type your message here"
+            required
+            onChange={(e) => setText(e.target.value)}
+            onKeyPress={handleKeyPress}
+          />
+          <button type="submit">Send</button>
+        </form>
       </div>
+      {loading && <Spinner />}
     </>
   );
 };

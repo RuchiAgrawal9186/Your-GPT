@@ -7,6 +7,7 @@ html,body{
   width:100%;
   height:100%;
   font-family: "roboto",sans-serif;
+  overflow: hidden;
 }
 .register-page{
   margin: auto;
@@ -88,85 +89,81 @@ textarea{
 }
 
 /* Chatbot.css */
-.chatbot-container {
-  display: flex;
-  flex-direction: column;
-  height: 70vh; /* 100% of the viewport height */
-  max-height: 100vh;
-  width:50%;
-  margin: auto;
-  border: 1px solid purple;
-  margin-top: 2%; /* In case content overflows, don't exceed viewport height */
-}
 
-.chat {
-  flex-grow: 1; /* The chat area expands to take up remaining vertical space */
-  overflow-y: auto; /* Allow vertical scrolling within the chat container */
+#chat-window {
+  width: 500px;
+  margin: 0 auto;
+  background-color:purple;
   padding: 20px;
+  border-radius: 10px;
+  margin-top: 50px;
 }
 
-.chat-message {
-  width: 70%;
-  margin: 5px;
+#chat-messages {
   padding: 10px;
-  border-radius: 5px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+  height: calc(100vh - 200px);
+  max-height: calc(100vh - 200px);
+  overflow: auto;
 }
 
-.chat-message.user {
-  align-self: flex-end;
-  background-color: #007bff;
-  color: white;
-}
-
-.user-input {
+#chat-form {
   display: flex;
   align-items: center;
-  padding: 10px;
-  background-color: #f0f0f0;
-  
 }
 
-input[type="text"] {
+#chat-input {
   flex-grow: 1;
   padding: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  width:85%
 }
 
-button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 5px;
+button[type="submit"] {
   padding: 10px 20px;
-  margin-left: 10px;
-  cursor: pointer;
-  outline: none;
+  border-radius: 10px;
+  background-color: #f7efe5;
+  color: #674188;
+  border: none;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.bot-message {
+  font-family: "Roboto", sans-serif;
+  background-color: rgb(107, 107, 216); /* different light color */
+  text-align: justify; /* keep it right-aligned */
+  padding: 15px; /* added padding */
+  margin-top: 10px; /* added margin-top to create a gap */
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  border-radius: 15px;
+  color:white
 }
 
-button:hover {
-  background-color: #0056b3;
+.user-message {
+  font-family: "Nunito", sans-serif;
+  background-color: rgb(228, 79, 228); /* light color */
+  text-align: left; /* changed text align to left */
+  padding: 15px; /* added padding */
+  display: flex;
+  align-items: center;
+  font-style: italic;
+  border-radius: 15px;
+  color:white
 }
-
-
-@media (max-width: 600px) {
-  /* Adjust styles for smaller screens */
-  .chat-message {
-    max-width: 80%;
-  }
-
-  .user-input {
-    flex-direction: column;
-  }
-
-  input[type="text"] {
-    margin-top: 10px;
-  }
-
-  button {
-    margin-top: 10px;
+.user-message img,
+.bot-message img {
+  width: 40px; /* adjust the width of the icon */
+  height: 40px; /* adjust the height of the icon */
+  margin-right: 20px; /* add some margin to separate the icon from the message */
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 400px) {
+  #chat-window {
+    width: 90%;
   }
 }
 
