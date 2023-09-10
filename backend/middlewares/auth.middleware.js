@@ -8,7 +8,7 @@ const auth = async(req, res, next)=>{
     const blacklist = await logoutModel.findOne({ token });
     if(token){
         if(blacklist){
-           res.status(500).json({msg: "Please Login again"})
+           res.status(201).json({msg: "Please Login again"})
            return
         }else{
             try{
@@ -18,7 +18,7 @@ const auth = async(req, res, next)=>{
                         req.body.user=decoded.user
                         next()
                     }else{
-                        res.status(500).json({msg:"Not authorize user"})
+                        res.status(201).json({msg:"Not authorize user"})
                     }
                 })
         

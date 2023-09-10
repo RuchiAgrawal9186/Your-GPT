@@ -1,5 +1,6 @@
 const express = require("express");
 require("dotenv").config();
+const {auth} = require("../middlewares/auth.middleware")
 
 const { Configuration, OpenAIApi } = require("openai");
 
@@ -10,6 +11,8 @@ const configuration = new Configuration({
 });
 
 const openai = new OpenAIApi(configuration);
+
+apiRouter.use(auth)
 
 apiRouter.post("/summary", async (req, res) => {
   try {
