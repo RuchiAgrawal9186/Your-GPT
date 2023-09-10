@@ -92,11 +92,11 @@ textarea{
 
 #chat-window {
   width: 500px;
-  margin: 0 auto;
+  margin: auto;
   background-color:purple;
   padding: 20px;
   border-radius: 10px;
-  margin-top: 50px;
+  margin-top: 10px;
 }
 
 #chat-messages {

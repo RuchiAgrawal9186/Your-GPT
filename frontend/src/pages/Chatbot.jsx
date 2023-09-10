@@ -37,6 +37,7 @@ const Chatbot = () => {
           { type: 'user', content: text }, // Add user message to state
           { type: 'bot', content: res.data } // Add bot response to state
         ]);
+        setText("")
       }
 
       setLoading(false);
