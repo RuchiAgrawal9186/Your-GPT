@@ -77,6 +77,7 @@ const Chatbot = () => {
         <form id="chat-form" onSubmit={handleSubmit}>
           <input
             type="text"
+            value={text}
             id="chat-input"
             autoComplete="off"
             placeholder="Type your message here"

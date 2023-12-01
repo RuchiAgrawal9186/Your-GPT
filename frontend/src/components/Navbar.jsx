@@ -32,8 +32,8 @@ const Navbar = () => {
   }
   return (
     <>
-    <Box width={"100%"} p="1rem 2%" textAlign={"center"} bgcolor={"purple"} color={"white"} boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px;"}>
-        <Typography variant='h3' color={"ehite"} fontWeight={"bold"} margin={"1%"}>
+    <Box width={"100%"} height={"100px"} p="5px 2%" textAlign={"center"} bgcolor={"purple"} color={"white"} boxShadow={"rgba(0, 0, 0, 0.35) 0px 5px 15px;"}>
+        <Typography variant='h4' color={"ehite"} fontWeight={"bold"} margin={"1%"}>
             Your - GPT
         </Typography>
         <Link to="/" style={{padding:"1%",color:"white"}}>Home</Link>

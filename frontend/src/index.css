@@ -32,10 +32,11 @@ html,body{
 .summary-page{
   margin: auto;
   width: 40%;
+  height: calc(100% - 100px);
   padding: 20px;
   border: 2px solid purple;
   background-color: aliceblue;
-  margin-top: 4%;
+  margin-top: 1%;
   border-radius: 10px;
   flex-direction: column;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
@@ -46,7 +47,7 @@ textarea{
   overflow: hidden;
 }
 .summury-container{
-  height: 60vh;
+  height: 40vh;
   border: 2px solid purple;
   background-color: white;
   color: black;
@@ -54,6 +55,7 @@ textarea{
   padding: 5px;
   font-size: medium;
   font-weight: 300;
+  margin-bottom: 3%;
 }
 .Toastify__toast--success {
   display: block !important;

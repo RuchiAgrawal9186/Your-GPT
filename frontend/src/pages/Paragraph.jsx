@@ -29,7 +29,7 @@ const Paragraph = () => {
         'Authorization': `Bearer ${localStorage.getItem("token")}`
       }
       });
-     console.log(res.data)
+    //  console.log(res.data)
      if(res.status==201)
      {
       toast.warn(res.data.msg)
